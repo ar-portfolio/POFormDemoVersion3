@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>PO Demo</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        html {
+            height: 100%;
+            background-color: cornflowerblue;
+        }
+
+        body {
+            width: 80%;
+            margin: auto;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        input:placeholder-shown, textarea:placeholder-shown {
+            font-style: italic;
+        }
+
+        #submit, .autofill, .glyph {
+            background-color: cornflowerblue;
+        }
+
+        #containerModal, .jumbotron, label {
+            color: cornflowerblue;
+        }
+
+        .jumbotron {
+            margin-top: 25px;
+        }
+
+        .item {
+            margin-top: 35px;
+            margin-bottom: 35px;
+        }
+
+        #addItemButton {
+            margin-bottom: 3em;
+        }
+
+        .searchButton {
+            margin-left: -25px;
+            margin-right: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron col-md-11 text-center">
+            <h1>Chefman Purchase Order Form</h1>
+        </div>
+        
+        <div class="clearfix"></div>
+               
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Vendor:</label>
+                <div class="col-md-6">
+                    <select class="form-control">
+                        <option>Kawasaki</option>
+                        <option>Mr. Miyagi</option>
+                        <option>Daniel son</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-success col-md-12">New Vendor</button>
+                </div>
+            </div>
+  
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Vendor Address:</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" rows="3" placeholder="Should populate after selecting a vendor, then edit if necessary"></textarea>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Bill To:</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" rows="3" placeholder="Enter Billing Address. Alternatively, drop-down list of Billing options"></textarea>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Ship To:</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" rows="3" placeholder="Enter Shipping Address. Alternatively, drop-down list of Shipping options"></textarea>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Order Date:</label>
+                <div class="col-md-8">
+                    <input id="orderDate" type="text" class="form-control"/>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Inspection Date:</label>
+                <div class="col-md-8">
+                    <input id="inspectionDate" type="date" class="form-control"/>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Freight:</label>
+                <div class="col-md-8">
+                    <select class="form-control">
+                        <option>Collect</option>
+                        <option>FOB</option>
+                        <option>Pre-paid</option>
+                        <option>POE</option>
+                        <option>POE Customer</option>
+                        <option>Customer Pick-up</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <!--div class="form-group">
+                <label class="col-md-2 control-label">Purchaser:</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="Purchaser"/>
+                </div>
+            </div-->
+
+            <div id="itemDiv">
+                <div class="col-md-8 col-md-offset-2 well well-lg item">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Item:</label>
+                        
+                        <div class="col-md-3">
+                            <select class="form-control">
+                                <option>RJ14-12-P</option>
+                                <option>RJ14-4-M</option>
+                                <option>RJ11-SKG</option>
+                            </select>
+                        </div>
+                      
+
+
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" placeholder="Search"/>
+                            </div>
+                            <div class="col-md-1 searchButton">
+                                <button class="btn btn-info glyph"><span class="glyphicon glyphicon-search"></span></button>
+                            </div>
+                        
+                        <div class="col-md-2">
+                            <button class="btn btn-success col-md-12">New Item</button>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Description:</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" rows="2" placeholder="Based on selected Item"></textarea>
+                        </div>
+                    </div>
+                  
+
+                    <!--div class="form-group">
+                        <label class="col-md-2 control-label">Container:</label>
+                        <div class="col-md-2 radio-inline">
+                            <input type="radio"> 20'
+                        </div>
+                        <div class="col-md-2 radio-inline">
+                            <input type="radio"> 40'
+                        </div>
+                        <div class="col-md-2 radio-inline" >
+                            <input type="radio"> 40' HC
+                        </div>
+                        <div class="col-md-2 radio-inline">
+                            <input type="radio"> 45'
+                        </div>
+                    </div-->
+
+
+                    <!--div class="form-group>">
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <input type="radio" name="container" checked>
+                                </span>
+                                <input type="text" class="form-control" value="20'" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <input type="radio" name="container">
+                                </span>
+                                <input type="text" class="form-control" value="40'" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <input type="radio" name="container">
+                                </span>
+                                <input type="text" class="form-control" value="40' HC" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <input type="radio" name="container">
+                                </span>
+                                <input type="text" class="form-control" value="45'" readonly>
+                            </div>
+                        </div>
+                    </div-->
+                                        
+
+
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Quantity:</label>
+                        <div class="col-md-2">
+                            <select class="form-control">
+                                <option>Eaches</option>
+                                <option>Cases</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="number" class="form-control" placeholder="Manual entry OR autofill -->"/>
+                        </div>
+                        
+                        <div class="col-md-3 col-md-offset-1">
+                            <button class="btn btn-primary col-md-12 autofill" data-toggle="modal" data-target="#containerModal">Autofill By Container</button>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Rate:</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" value="Based on selected Item and QTY type (This field is Read Only)" readonly/>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Total:</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" value="Quantity * Rate (This field is Read Only)" readonly/>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2 col-md-offset-8">
+                    <button id="addItemButton" class="btn btn-warning col-md-12">Add Item</button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Total Price:</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="Total for all items (This field is Read Only)" readonly/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Message to Vendor:</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" rows="6" placeholder="Type Message"></textarea>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Memo:</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" rows="6" placeholder="Type Memo"></textarea>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Attachments:</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" rows="6" placeholder="Drag and Drop Files Here"></textarea>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <button type="submit" class="btn btn-primary" id="submit">Submit For Approval</button>
+                 </div>
+            </div>
+        </form>
+    </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="containerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h1 class="modal-title text-center" id="myModalLabel">Autofill By Container</h1>
+      </div>
+      
+      <form class="form-horizontal">
+
+      <div class="modal-body">
+          
+            <div class="form-group">
+                <label class="col-md-2 col-md-offset-2 control-label text-center">Size:</label>
+                <div class="col-md-4">
+                    <select class="form-control">
+                        <option>20'</option>
+                        <option>40'</option>
+                        <option>40' HC</option>
+                        <option>45'</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 col-md-offset-2 control-label">Amount:</label>
+                <div class="col-md-4">
+                    <input type="number" class="form-control" value="1">
+                </div>
+            </div>
+      
+        </div>
+      </form>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="   crossorigin="anonymous"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="poForm.js"></script>
+</body>
+</html>
